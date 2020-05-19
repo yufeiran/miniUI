@@ -1,0 +1,2 @@
+# miniUI
+源自之前的miniTown的UI部分，这部分在原先实现中调用了过多的windows系统绘制ui的API导致开销巨大，在此剥离出来重构
