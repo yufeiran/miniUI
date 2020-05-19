@@ -8,7 +8,7 @@ Picture picA;
 
 UI ui0;
 UI ui1;
-
+UI ui2;
 
 void fun1()
 {
@@ -43,6 +43,15 @@ void GameInit()
 	ui1.WordToPic0();
 	ui1.fun = fun2;
 	uiManager.AddUI(ui1);
+
+	ui2.x = 100;
+	ui2.y = 100;
+	ui2.width = 100;
+	ui2.height = 100;
+	ui2.title = "2333";
+	ui2.WordToPic0();
+	ui2.isInputBox = true;
+	uiManager.AddUI(ui2);
 	
 
 }

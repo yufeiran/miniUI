@@ -11,19 +11,64 @@ void UIManager::UILoop()
 			if (uiVector[i].x <= ClickX && uiVector[i].x + uiVector[i].width>=ClickX
 				&& uiVector[i].y<=ClickY && uiVector[i].y + uiVector[i].height >= ClickY)
 			{
-				uiVector[i].fun();
-				break;
+				if (uiVector[i].fun != NULL)
+				{
+					uiVector[i].fun();
+				}
+				uiVector[i].isOnFoucus = true;
+			}
+			else
+			{
+				uiVector[i].isOnFoucus = false;
 			}
 		}
 		isClick = false;
 	}
+	if (isKeyPress == true)
+	{
+		for (int i = 0; i < uiVector.size(); i++)
+		{
+			if (uiVector[i].isInputBox == true&&uiVector[i].isOnFoucus==true)
+			{
+				if (KeyPressValue == 8)
+				{
+					if (uiVector[i].title.size() > 0)
+					{
+						uiVector[i].title.pop_back();
+
+					}
+					uiVector[i].WordToPic0();
+
+				}
+				else if(isalnum(KeyPressValue)!=0)
+				{
+					uiVector[i].title.push_back(KeyPressValue);
+					uiVector[i].WordToPic0();
+				}
+
+			}
+			
+		}
+		isKeyPress = false;
+	}
 }
 
-void UIManager::OnClickPos(int x, int y)
+void UIManager::OnClickPos()
 {
 	isClick = true;
-	ClickX = x;
-	ClickY = y;
+
+}
+
+void UIManager::MousePos(int x, int y)
+{
+	this->ClickX = x;
+	this->ClickY = y;
+}
+
+void UIManager::OnKeyPress(int keyValue)
+{
+	isKeyPress = true;
+	KeyPressValue = keyValue;
 }
 
 void UIManager::AddUI(UI& ui)
@@ -56,9 +101,12 @@ void UI::WordToPic0()
 	int charWidth = 8 * this->title.size();
 	int charHeight = 16;
 	int size = charWidth * charHeight;
-
-	if (pic0 == NULL)
+	if (pic0 == NULL||pic0->nWidth*pic0->nHeight<size)
 	{
+		if (pic0 != NULL)
+		{
+			delete pic0;
+		}
 		pic0 = new Picture;
 		pic0->pChannelR = new BYTE[size];
 		pic0->pChannelG = new BYTE[size];

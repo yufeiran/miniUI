@@ -246,21 +246,28 @@ LRESULT CALLBACK WindowProc(
 	}
 	case WM_KEYDOWN:
 	{
-		
+		uiManager.OnKeyPress(wParam);
 		if (wParam == VK_ESCAPE)
 			exit(0);
 		if (wParam == VK_RETURN)
 		{
-
+		
 		}
+		break;
 	}
 	case WM_LBUTTONDOWN:
 	{
 		int x = GET_X_LPARAM(lParam);
 		int y = GET_Y_LPARAM(lParam);
-		cout << GET_X_LPARAM(lParam) << endl;
-		cout << GET_Y_LPARAM(lParam) << endl;
-		uiManager.OnClickPos(x, y);
+		std::cout << "Key Press" << std::endl;
+		uiManager.MousePos(x, y);
+		uiManager.OnClickPos();
+		break;
+	}
+	case WM_MOUSEMOVE:
+	{
+
+		
 	}
 	}
 
