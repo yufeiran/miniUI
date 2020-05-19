@@ -1,6 +1,7 @@
 #include"miniUI.h"
 #include"window.h"
 
+
 void UIManager::UILoop()
 {
 	if (isClick == true)
@@ -16,7 +17,6 @@ void UIManager::UILoop()
 		}
 		isClick = false;
 	}
-
 }
 
 void UIManager::OnClickPos(int x, int y)
@@ -53,17 +53,36 @@ int UI::getHeight()
 
 void UI::WordToPic0()
 {
-	int charWidth = 8;
+	int charWidth = 8 * this->title.size();
 	int charHeight = 16;
 	int size = charWidth * charHeight;
-	pic0 = new Picture;
-	pic0->pChannelR = new BYTE[size]; 
-	pic0->pChannelG = new BYTE[size];
-	pic0->pChannelB = new BYTE[size];
-	pic0->pChannelA = new BYTE[size];
-	pic0->nWidth = charWidth;
-	pic0->nHeight = charHeight;
-	DrawWord(0, 0, title[0], *pic0,Color(0,0,0));
 
+	if (pic0 == NULL)
+	{
+		pic0 = new Picture;
+		pic0->pChannelR = new BYTE[size];
+		pic0->pChannelG = new BYTE[size];
+		pic0->pChannelB = new BYTE[size];
+		pic0->pChannelA = new BYTE[size];
+		pic0->nWidth = charWidth;
+		pic0->nHeight = charHeight;
+
+	}
+	for (int i = 0; i < sizeof(pic0->pChannelR); i++)
+	{
+		
+	}
+	for (int i = 0; i < this->pic0->getHeight(); i++)
+	{
+		for (int j = 0; j < this->pic0->getWidth(); j++)
+		{
+			DrawPointOnPicture(j, i,  Color(255, 255, 255), *pic0);
+		}
+	}
+
+	for (int i = 0; i < title.size(); i++)
+	{
+		DrawWord(i*8, 0, title[i], *pic0, Color(0, 0, 0));
+	}
 
 }

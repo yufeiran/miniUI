@@ -8,13 +8,17 @@ Picture picA;
 
 UI ui0;
 UI ui1;
+
+
 void fun1()
 {
 	std::cout << "fun1" << std::endl;
 }
 void fun2()
 {
+	std::cout << "fun2" << std::endl;
 	ui1.title = "23";
+	ui1.WordToPic0();
 }
 
 void GameInit()
@@ -28,14 +32,14 @@ void GameInit()
 	ui0.pic0 = &picL;
 	ui0.fun = fun1;
 
-	uiManager.AddUI(ui0);
+	//uiManager.AddUI(ui0);
 
 	
 	ui1.x = 500;
 	ui1.y = 500;
 	ui1.width = 100;
 	ui1.height = 100;
-	ui1.title = "hi";
+	ui1.title = "Button1";
 	ui1.WordToPic0();
 	ui1.fun = fun2;
 	uiManager.AddUI(ui1);

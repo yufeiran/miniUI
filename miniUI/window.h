@@ -201,7 +201,7 @@ void DrawWord(int startX, int startY, char CharToDraw, Picture& pic ,Color color
 void DrawRectangle(int x0, int y0, int x1, int y1, Color color = Color(255, 255, 255));
  void DrawPic(int x, int y, Picture* pic);
 
-
+ void DrawPointOnPicture(int& x, int& y, const Color& color, Picture& pic);
 
 
  void GameInit();
